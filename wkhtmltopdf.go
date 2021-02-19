@@ -290,7 +290,8 @@ func (pdfg *PDFGenerator) Create() error {
 
 func (pdfg *PDFGenerator) run() error {
 	// create command
-	cmd := exec.Command("xvfb-run "+pdfg.binPath, pdfg.Args()...)
+	args := append([]string{pdfg.binPath}, pdfg.Args()...)
+	cmd := exec.Command("xvfb-run", args...)
 
 	// set stderr to the provided writer, or create a new buffer
 	var errBuf *bytes.Buffer
